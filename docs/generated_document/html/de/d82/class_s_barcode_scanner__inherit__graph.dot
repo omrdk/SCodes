@@ -1,0 +1,10 @@
+digraph "SBarcodeScanner"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{SBarcodeScanner\n|+ videoSink\l+ captureRect\l- m_decoder\l- camera\l- m_videoSink\l- m_captureRect\l- m_captured\l- m_capture\l- workerThread\l- worker\l- m_processing\l|+ SBarcodeScanner()\l+ ~SBarcodeScanner()\l+ getDecoder()\l+ videoSink()\l+ setVideoSink()\l+ captureRect()\l+ setCaptureRect()\l+ captured()\l+ pauseProcessing()\l+ continueProcessing()\l+ setProcessing()\l+ imageProcess()\l- setCaptured()\l- handleFrameCaptured()\l- initCam()\l- stopCam()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The SBarcodeScanner class is a custom class that allows image processing with the cooperation of QML ..."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{QVideoSink\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+}

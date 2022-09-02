@@ -29,7 +29,6 @@ class SBarcodeGenerator : public QQuickItem
     Q_PROPERTY(SCodes::SBarcodeFormat format READ format WRITE setFormat NOTIFY formatChanged)
 
 public:
-
     /*!
      * \fn explicit SBarcodeGenerator(QObject *parent)
      * \brief Constructor.
@@ -57,7 +56,6 @@ public:
     void setFormat(SCodes::SBarcodeFormat format);
 
 public slots:
-
     /*!
      * \fn bool generate(const QString &inputString)
      * \brief Function for generating barcodes from given string
@@ -79,7 +77,6 @@ public slots:
     bool saveImage();
 
 signals:
-
     /*!
      * \brief This signal is emitted when barcode generation is finished. If any error happens, sends the error string to QML.
      * \param const QString &error - error string.

@@ -17,6 +17,8 @@ set(BUILD_BLACKBOX_TESTS OFF)
 set(BUILD_EXAMPLES OFF)
 add_subdirectory(zxing-cpp)
 
+option(GEN_DOCUMENTATION "Add documentation based on Doxygen template" ON)
+
 find_package(QT NAMES Qt5 Qt6 COMPONENTS Core Multimedia Concurrent Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Multimedia Concurrent Quick REQUIRED)
 
@@ -36,6 +38,15 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     QT_QML_MODULE_VERSION 1.0
     QT_QML_MODULE_URI com.scythestudio.scodes
 )
+
+if(GEN_DOCUMENTATION)
+    find_package(Doxygen REQUIRED)
+    set(DOCUMENTATION_DOC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../docs")
+    set(doxyfile "${DOCUMENTATION_DOC_DIR}/Doxyfile")
+    execute_process(COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
+                    WORKING_DIRECTORY ${DOCUMENTATION_DOC_DIR})
+endif()
+
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ZXing Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Quick)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

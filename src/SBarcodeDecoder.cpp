@@ -15,6 +15,9 @@
 
 #include <QOffscreenSurface>
 
+/*!
+ * \brief Provide a interface to access `ZXing::ReadBarcode` method
+ */
 namespace ZXing {
 namespace Qt {
 using ZXing::DecodeHints;
@@ -28,18 +31,36 @@ QDebug operator << (QDebug dbg, const T& v)
     return dbg.noquote() << QString::fromStdString(ToString(v));
 }
 
+/*!
+ * \brief Encapsulates the result of decoding a barcode within an image
+ */
 class Result : private ZXing::Result
 {
 public:
+    /*!
+     * \fn explicit Result(ZXing::Result&& r) : ZXing::Result(std::move(r))
+     * \brief Constructor
+     * \param ZXing::Result&& r - Result class
+     */
     explicit Result(ZXing::Result&& r) : ZXing::Result(std::move(r)){ }
 
     using ZXing::Result::format;
     using ZXing::Result::isValid;
     using ZXing::Result::status;
 
+    /*!
+     * \fn inline QString text() const
+     * \return scanned result human readable text
+     */
     inline QString text() const { return QString::fromWCharArray(ZXing::Result::text().c_str()); }
 };
 
+/*!
+ * \fn Result ReadBarcode(const QImage& img, const DecodeHints& hints = { })
+ * \brief Interface for calling ZXing::ReadBarcode method to get result as a text.
+ * \param const QImage& img - referance of the image to be processed
+ * \param const DecodeHints& hints - barcode decode hints
+ */
 Result ReadBarcode(const QImage& img, const DecodeHints& hints = { })
 {
     auto ImgFmtFromQImg = [](const QImage& img){
